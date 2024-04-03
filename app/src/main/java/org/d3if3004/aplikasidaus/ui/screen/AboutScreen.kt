@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import org.d3if3004.aplikasidaus.R
 
@@ -46,7 +47,12 @@ fun AboutScreen(navController: NavHostController){
                 }
             )
         }
-    ){ padding ->
-        ScreenContent(Modifier.padding(padding))
+    ){padding ->
+        Text(text = stringResource(id = R.string.tentang),
+            modifier = Modifier
+                .padding(padding)
+                .padding(16.dp)
+
+            )
     }
 }
