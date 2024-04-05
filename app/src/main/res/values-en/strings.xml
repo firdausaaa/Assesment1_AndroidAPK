@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Hitung Skor</string>
+    <string name="tentang_aplikasi">About App</string>
+    <string name="kembali">Back</string>
+    <string name="versus">VS</string>
+    <string name="team1">Team 1</string>
+    <string name="team2">Team 2</string>
+    <string name="babak1">1st Half</string>
+    <string name="babak2">2nd Half</string>
+    <string name="tentang">fwjieniwbviuer</string>
+    <string name="invalid">team name cannot be the same</string>
+    <string name="copyright">%1$s Nama Tim 1: %2$s Nama Tim 2 : %3$s   %4$s  :  %5$s</string>
+    <string name="bagikan_template">%1$s Nama Tim 1: %2$s Nama Tim 2 : %3$s   %4$s  :  %5$s</string>
+</resources>

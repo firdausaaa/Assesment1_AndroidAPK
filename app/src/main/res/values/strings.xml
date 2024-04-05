@@ -3,8 +3,14 @@
     <string name="tentang_aplikasi">Tentang Aplikasi</string>
     <string name="kembali">Kembali</string>
     <string name="versus">VS</string>
-    <string name="team1">Team1</string>
-    <string name="team2">Team2</string>
+    <string name="team1">Tim 1</string>
+    <string name="team2">Tim 2</string>
+    <string name="babak1">Babak 1</string>
+    <string name="babak2">Babak 2</string>
     <string name="tentang">fwjieniwbviuer</string>
-    <string name="bagikan_template">: %1$s kg\nTinggi badan: %2$s cm\nJenis Kelamin: %3$s\n\nBMI: %4$.2f\n%5$s</string>
+    <string name="invalid">nama tim tidak boleh sama</string>
+    <string name="copyright">Hitung Skor merupakan sebuah aplikasi Android untuk memudahkan kita sebagai pengguna untuk menghitung skor dalam pertandingan sehingga seseorang dapat mengetahui skor secara langsung dan mengetahui tim manakah yang memenangkan pertandingan dan dapat membagikan hasil skor tersebut kepada teman, kerabat, saudara atau siapapun.\n\nAplikasi ini dibuat untuk kelas Mobpro 1.\n\nCopyright © 2024 Firdaus Akbar Amrullah.\nAll rights reserved.</string>
+    <string name="bagikan_template">%1$s\nNama Tim 1: %2$s Nama Tim 2 : %3$s \n %4$s  :  %5$s</string>
+
+
 </resources>

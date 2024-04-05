@@ -12,10 +12,13 @@ import androidx.compose.foundation.layout.absolutePadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.Button
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -37,6 +40,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.fontResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -84,6 +88,7 @@ fun MainScreen(navController: NavHostController){
     }
 }
 
+
 @Composable
 fun ScreenContent(modifier: Modifier) {
     var number by rememberSaveable { mutableIntStateOf(0) }
@@ -91,7 +96,20 @@ fun ScreenContent(modifier: Modifier) {
     var namaTeam1 by rememberSaveable { mutableStateOf("") }
     var namaTeam2 by rememberSaveable { mutableStateOf("") }
     var showPopup by remember { mutableStateOf(false) }
-
+    val opsiBabak = listOf(
+        stringResource(id = R.string.babak1),
+        stringResource(id = R.string.babak2)
+    )
+    var babak by rememberSaveable {
+        mutableStateOf(opsiBabak[0])
+    }
+    val babak2 by rememberSaveable {
+        mutableStateOf(opsiBabak[1])
+    }
+    var teamError by rememberSaveable {
+        mutableStateOf(false)
+    }
+    val context = LocalContext.current
 
     Row(
         modifier = modifier
@@ -105,23 +123,37 @@ fun ScreenContent(modifier: Modifier) {
             value = namaTeam1,
             onValueChange = { namaTeam1 = it },
             label = { Text(text = stringResource(id = R.string.team1)) },
+            isError = teamError,
+            trailingIcon = { IconPicker(teamError) },
+            supportingText = { ErrorHint(teamError)},
             singleLine = true,
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Text,
                 imeAction = ImeAction.Next
             ),
-            modifier = Modifier
-        )
+            modifier = Modifier.size(width = 150.dp, height = 60.dp),
+
+            )
+        Row {
+            Text(
+                text = babak,
+                style = MaterialTheme.typography.headlineMedium,
+                modifier = Modifier.padding(top = 16.dp)
+            )
+        }
         OutlinedTextField(
             value = namaTeam2,
             onValueChange = { namaTeam2 = it },
             label = { Text(text = stringResource(id = R.string.team2)) },
+            isError = teamError,
+            trailingIcon = { IconPicker(teamError) },
+            supportingText = { ErrorHint(teamError)},
             singleLine = true,
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Text,
                 imeAction = ImeAction.Next
             ),
-            modifier = Modifier.absolutePadding(bottom = 0.dp)
+            modifier = Modifier.size(width = 150.dp, height = 60.dp),
         )
     }
     Row(
@@ -135,27 +167,27 @@ fun ScreenContent(modifier: Modifier) {
             onClick = {
                 number++
             },
-            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 17.dp)
+            contentPadding = PaddingValues(horizontal = 10.dp, vertical = 11.dp)
         ) {
             Text(text = "+")
         }
         Text(
             text = number.toString(),
-            style = MaterialTheme.typography.displayLarge
+            style = MaterialTheme.typography.displayMedium
         )
         Text(
             text = stringResource(id = R.string.versus),
-            style = MaterialTheme.typography.headlineLarge
+            style = MaterialTheme.typography.headlineMedium
         )
         Text(
             text = number2.toString(),
-            style = MaterialTheme.typography.displayLarge
+            style = MaterialTheme.typography.displayMedium
         )
         Button(
             onClick = {
                 number2++
             },
-            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 17.dp)
+            contentPadding = PaddingValues(horizontal = 10.dp, vertical = 11.dp)
         ) {
             Text(text = "+")
         }
@@ -165,30 +197,56 @@ fun ScreenContent(modifier: Modifier) {
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceAround
     ) {
-        Button(
-            onClick = {
-                showPopup = true
-            },
-            modifier = modifier.absolutePadding(top = 200.dp),
-            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 17.dp)
-        ) {
-            Text(text = "Hasil", style = MaterialTheme.typography.titleLarge)
-        }
-//        if (showPopup) {
-//            MyPopup(message = "halo", showPopup = true)
-//            }
             Button(
                 onClick = {
-                    number = 0
-                    number2 = 0
+                    teamError =(namaTeam1 == namaTeam2)
+                    if (teamError)return@Button
+
+                    shareData(context,
+                        context.getString(R.string.bagikan_template, babak,namaTeam1, namaTeam2, number.toString(), number2.toString(), )
+                        )
+
                 },
                 modifier = modifier.absolutePadding(top = 200.dp),
-                contentPadding = PaddingValues(horizontal = 16.dp, vertical = 17.dp)
+                shape = RoundedCornerShape(10.dp)
             ) {
-                Text(text = "Reset", style = MaterialTheme.typography.titleLarge)
+                Text(text = "Bagikan", style = MaterialTheme.typography.titleLarge)
             }
+        Button(
+            onClick = {
+                babak = babak2
+                number = 0
+                number2 = 0
+            },
+                modifier = Modifier.absolutePadding(top = 250.dp),
+            shape = RoundedCornerShape(10.dp)
+            ) {
+            Text(text = "Babak", style = MaterialTheme.typography.titleLarge)
+        }
+        Button(
+            onClick = {
+                number = 0
+                number2 = 0
+                babak = opsiBabak[0]
+                namaTeam1 = ""
+                namaTeam2 = ""
+            },
+            modifier = modifier.absolutePadding(top = 200.dp),
+            shape = RoundedCornerShape(10.dp)
+        ) {
+            Text(text = "Reset", style = MaterialTheme.typography.titleLarge)
+        }
+
     }
 }
+
+@Composable
+fun IconPicker(isError: Boolean) {
+    if (isError){
+        Icon(imageVector = Icons.Filled.Warning, contentDescription = null)
+    }
+}
+
 private fun shareData(context: Context, message: String){
     val shareIntent = Intent(Intent.ACTION_SEND).apply {
         type = "text/plain"
@@ -226,6 +284,12 @@ fun MyPopup(message: String,showPopup: MutableState<Boolean>) {
     }
 }
 
+@Composable
+fun ErrorHint(isError: Boolean) {
+    if (isError) {
+        Text(text = stringResource(R.string.invalid))
+    }
+}
 fun tutup(showPopup: MutableState<Boolean>) {
     showPopup.value = false
 
