@@ -10,6 +10,6 @@
     <string name="babak2">2nd Half</string>
     <string name="tentang">fwjieniwbviuer</string>
     <string name="invalid">team name cannot be the same</string>
-    <string name="copyright">%1$s Nama Tim 1: %2$s Nama Tim 2 : %3$s   %4$s  :  %5$s</string>
+    <string name="copyright">Calculate Score is an Android application to make it easier for us as users to calculate scores in matches so that someone can find out the score directly and find out which team won the match and can share the score results with friends, relatives, relatives or anyone else.\\n\\n  This application was created for Mobpro 1 class. \\n\\nCopyright © 2024 Firdaus Akbar Amrullah.  \\n\\n6706223004 \\n\\nAll rights reserved.</string>
     <string name="bagikan_template">%1$s Nama Tim 1: %2$s Nama Tim 2 : %3$s   %4$s  :  %5$s</string>
 </resources>
